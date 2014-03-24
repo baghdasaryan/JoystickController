@@ -21,23 +21,29 @@ JoystickController::JoystickController(int **axes, int **buttons)
         return;
     }
 
-	ioctl(m_fd, JSIOCGNAME(NAME_LENGTH), &m_name);
-	ioctl(m_fd, JSIOCGAXES, &m_numAxes);
-	ioctl(m_fd, JSIOCGBUTTONS, &m_numButtons);
+    ioctl(m_fd, JSIOCGNAME(NAME_LENGTH), &m_name);
+
+    int data;
+    ioctl(m_fd, JSIOCGAXES, &data);
+    m_numAxes = data;
+
+    ioctl(m_fd, JSIOCGBUTTONS, &data);
+    m_numButtons = data;
+
     fcntl(m_fd, F_SETFL, O_NONBLOCK);
 
 	m_axes = (int *) calloc(m_numAxes, sizeof(int));
     *axes = m_axes;
 
-	m_buttons = (int *) calloc(m_numButtons, sizeof(char));
+    m_buttons = (int *) calloc(m_numButtons, sizeof(char));
     *buttons = m_buttons;
 }
 
 JoystickController::~JoystickController()
 {
-	free(m_axes);
-	free(m_buttons);
-	close(m_fd);
+    free(m_axes);
+    free(m_buttons);
+    close(m_fd);
 }
 
 void JoystickController::getInfo(char *name, int &numAxes, int &numButtons) const
@@ -49,15 +55,15 @@ void JoystickController::getInfo(char *name, int &numAxes, int &numButtons) cons
 
 void JoystickController::update()
 {
-	read(m_fd, &m_js, sizeof(struct js_event));
-	switch(m_js.type & ~JS_EVENT_INIT)
-	{
-		case JS_EVENT_AXIS:
-			m_axes   [ m_js.number ] = m_js.value;
-			break;
-		case JS_EVENT_BUTTON:
-			m_buttons [ m_js.number ] = m_js.value;
-			break;
-	}
+    read(m_fd, &m_js, sizeof(struct js_event));
+    switch(m_js.type & ~JS_EVENT_INIT)
+    {
+        case JS_EVENT_AXIS:
+            m_axes   [ m_js.number ] = m_js.value;
+            break;
+        case JS_EVENT_BUTTON:
+            m_buttons [ m_js.number ] = m_js.value;
+            break;
+    }
 }
 

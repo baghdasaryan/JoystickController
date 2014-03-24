@@ -10,6 +10,10 @@
 // ############################################ //
 
 
+#ifndef __JOYSTICKCONTROLLER_H__
+#define __JOYSTICKCONTROLLER_H__
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -26,17 +30,17 @@
 // See manual: http://www.logitech.com/assets/34885/f710620-002923003403gswamr.pdf
 enum joystickButtons {
     // Four action buttons
-    JT_A, JT_B, JT_X, JT_Y,
+    JB_A, JB_B, JB_X, JB_Y,
 
     // Left Button
-    JT_LB,
+    JB_LB,
 
     // Right Button
-    JT_RB,
+    JB_RB,
 
     // Start and Back buttons
-    JT_BACK,
-    JT_START
+    JB_BACK,
+    JB_START
 };
 enum joystickTriggers {
     // Left side: mini-sticks(horizontal and vertical) and trigger
@@ -72,4 +76,6 @@ class JoystickController
         int m_numButtons;
         int *m_buttons;
 };
+
+#endif  // __JOYSTICKCONTROLLER_H__
 
