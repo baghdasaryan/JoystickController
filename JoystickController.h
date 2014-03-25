@@ -61,7 +61,7 @@ enum joystickTriggers {
 class JoystickController
 {
     public:
-        JoystickController(int **axes, int **buttons);
+        JoystickController(int **axes, char **buttons);
         ~JoystickController();
 
         void getInfo(char *name, int &numAxes, int &numButtons) const;
@@ -74,7 +74,7 @@ class JoystickController
         int m_numAxes;
         int *m_axes;
         int m_numButtons;
-        int *m_buttons;
+        char *m_buttons;
 };
 
 #endif  // __JOYSTICKCONTROLLER_H__

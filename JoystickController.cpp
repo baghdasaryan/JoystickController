@@ -13,15 +13,16 @@
 #include "JoystickController.h"
 
 
-JoystickController::JoystickController(int **axes, int **buttons)
+JoystickController::JoystickController(int **axes, char **buttons)
 {
     m_numAxes = m_numButtons = 0;
-    m_axes = m_buttons = NULL;
+    *axes = m_axes = NULL;
+    *buttons = m_buttons = NULL;
 
 	if((m_fd = open(JOY_DEV, O_RDONLY | O_NONBLOCK | O_SYNC)) == -1)
     {
         printf("Couldn't open joystick\n");
-        exit(EXIT_FAILURE);
+        return;
     }
 
     ioctl(m_fd, JSIOCGNAME(NAME_LENGTH), &m_name);
@@ -36,7 +37,7 @@ JoystickController::JoystickController(int **axes, int **buttons)
 	m_axes = (int *) calloc(m_numAxes, sizeof(int));
     *axes = m_axes;
 
-    m_buttons = (int *) calloc(m_numButtons, sizeof(char));
+    m_buttons = (char *) calloc(m_numButtons, sizeof(char));
     *buttons = m_buttons;
 }
 
@@ -60,10 +61,10 @@ void JoystickController::update()
     switch(m_js.type & ~JS_EVENT_INIT)
     {
         case JS_EVENT_AXIS:
-            m_axes   [ m_js.number ] = m_js.value;
+            m_axes[m_js.number] = m_js.value;
             break;
         case JS_EVENT_BUTTON:
-            m_buttons [ m_js.number ] = m_js.value;
+            m_buttons[m_js.number] = m_js.value;
             break;
     }
 }

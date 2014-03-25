@@ -20,12 +20,14 @@ void testAxes(JoystickController *jc, int *axes);
 int main()
 {
     int *axes;
-    int *buttons;
+    char *buttons;
 
     JoystickController jc(&axes, &buttons);
+    if(axes == NULL || buttons == NULL)
+        exit(EXIT_FAILURE);
 
     testInfo(&jc);
-    //testAxes(&jc, axes);
+    testAxes(&jc, axes);
     //testButtons(&jc, buttons);
 }
 
