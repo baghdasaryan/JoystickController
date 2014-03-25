@@ -15,7 +15,7 @@
 
 JoystickController::JoystickController(int **axes, int **buttons)
 {
-	if((m_fd = open(JOY_DEV, O_RDONLY | O_NONBLOCK)) == -1)
+	if((m_fd = open(JOY_DEV, O_RDONLY | O_NONBLOCK | O_SYNC)) == -1)
     {
         printf( "Couldn't open joystick\n" );
         return;
