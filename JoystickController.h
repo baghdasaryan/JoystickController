@@ -22,7 +22,7 @@
 #include <linux/joystick.h>
 #include <string.h>
 
-#define JOY_DEV "/dev/input/js1"
+#define JOY_DEV "/dev/input/js0"
 #define NAME_LENGTH 80
 
 

@@ -26,7 +26,7 @@ int main()
 
     testInfo(&jc);
     //testAxes(&jc, axes);
-    testButtons(&jc, buttons);
+    //testButtons(&jc, buttons);
 }
 
 void testInfo(JoystickController *jc)

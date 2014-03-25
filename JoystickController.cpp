@@ -15,15 +15,18 @@
 
 JoystickController::JoystickController(int **axes, int **buttons)
 {
+    m_numAxes = m_numButtons = 0;
+    m_axes = m_buttons = NULL;
+
 	if((m_fd = open(JOY_DEV, O_RDONLY)) == -1)
     {
-        printf( "Couldn't open joystick\n" );
-        return;
+        printf("Couldn't open joystick\n");
+        exit(EXIT_FAILURE);
     }
 
     ioctl(m_fd, JSIOCGNAME(NAME_LENGTH), &m_name);
 
-    int data;
+    int data = 0;
     ioctl(m_fd, JSIOCGAXES, &data);
     m_numAxes = data;
 
