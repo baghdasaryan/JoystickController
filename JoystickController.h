@@ -25,38 +25,48 @@
 #define JOY_DEV "/dev/input/js0"
 #define NAME_LENGTH 80
 
+#define DIRECT_JS_INPUT
 
 // Mainly for Logitech F710
 // See manual: http://www.logitech.com/assets/34885/f710620-002923003403gswamr.pdf
-enum joystickButtons {
-    // Four action buttons
-    JB_A, JB_B, JB_X, JB_Y,
+/* ************************** */
+#ifdef DIRECT_JS_INPUT
 
-    // Left Button
-    JB_LB,
+// Four action buttons
+#define JB_A 1
+#define JB_B 2
+#define JB_X 0
+#define JB_Y 3
 
-    // Right Button
-    JB_RB,
+#define JB_LB 4    // Left Button
+#define JB_RB 5    // Right Button
 
-    // Start and Back buttons
-    JB_BACK,
-    JB_START
-};
-enum joystickTriggers {
-    // Left side: mini-sticks(horizontal and vertical) and trigger
-    JT_LMS_HOR,
-    JT_LMS_VERT,
-    JT_LT,
+// mini-stick buttons
+#define JB_LMS 10
+#define JB_RMS 11
 
-    // Right side: mini-sticks(horizontal and vertical) and trigger
-    JT_RMS_HOR,
-    JT_RMS_VERT,
-    JT_RT,
+// Start and Back buttons
+#define JB_BACK 8
+#define JB_START 9
 
-    // 8-way D-pad
-    JT_PAD_HOR,
-    JT_PAD_VERT
-};
+// Left side: mini-sticks(horizontal and vertical)
+#define JT_LMS_HOR 0 
+#define JT_LMS_VERT 1
+
+// Right side: mini-sticks(horizontal and vertical) and trigger
+#define JT_RMS_HOR 2
+#define JT_RMS_VERT 3
+
+// 8-way D-pad
+#define JT_PAD_HOR 4
+#define JT_PAD_VERT 5
+
+// Left and right side triggers
+#define JT_LT 10
+#define JT_RT 11
+
+#endif  // DIRECT_JS_INPUT
+/* ************************** */
 
 class JoystickController
 {

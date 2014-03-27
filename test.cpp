@@ -14,8 +14,8 @@
 
 
 void testInfo(JoystickController *jc);
-void testButtons(JoystickController *jc, int *buttons);
 void testAxes(JoystickController *jc, int *axes);
+void testButtons(JoystickController *jc, char *buttons);
 
 int main()
 {
@@ -28,7 +28,7 @@ int main()
 
     testInfo(&jc);
     testAxes(&jc, axes);
-    //testButtons(&jc, buttons);
+    testButtons(&jc, buttons);
 }
 
 void testInfo(JoystickController *jc)
@@ -54,27 +54,26 @@ void testAxes(JoystickController *jc, int *axes)
         jc->update();
 
         // Left Side
-        printf("LMS_HOR=%6d    ", axes[JT_LMS_HOR]);
-        printf("LMS_VERT=%6d    ", axes[JT_LMS_VERT]);
-        printf("LT=%6d    ", axes[JT_LT]);
+        printf("LMS_HOR = %6d    ", axes[JT_LMS_HOR]);
+        printf("LMS_VERT = %6d    ", axes[JT_LMS_VERT]);
+        printf("LT = %6d    ", axes[JT_LT]);
 
         // Right Side
-        printf("RMS_HOR=%6d    ", axes[JT_RMS_HOR]);
-        printf("RMS_VERT=%6d    ", axes[JT_RMS_VERT]);
-        printf("LT=%6d    ", axes[JT_RT]);
+        printf("RMS_HOR = %6d    ", axes[JT_RMS_HOR]);
+        printf("RMS_VERT = %6d    ", axes[JT_RMS_VERT]);
+        printf("RT = %6d    ", axes[JT_RT]);
 
         // Pad
-        printf("PAD_HOR=%6d    ", axes[JT_PAD_HOR]);
-        printf("PAD_VERT=%6d", axes[JT_PAD_VERT]);
+        printf("PAD_HOR = %6d    ", axes[JT_PAD_HOR]);
+        printf("PAD_VERT = %6d", axes[JT_PAD_VERT]);
 
         printf("     \r");
         fflush(stdout);
     }
 }
 
-void testButtons(JoystickController *jc, int *buttons)
+void testButtons(JoystickController *jc, char *buttons)
 {
-
     while(true)
     {
         // Update controller state
@@ -87,6 +86,8 @@ void testButtons(JoystickController *jc, int *buttons)
         printf("Y = %1d; ", buttons[JB_Y]);
         printf("LB = %1d; ", buttons[JB_LB]);
         printf("RB = %1d; ", buttons[JB_RB]);
+        printf("LMS = %1d; ", buttons[JB_LMS]);
+        printf("RMS = %1d; ", buttons[JB_RMS]);
         printf("back = %1d; ", buttons[JB_BACK]);
         printf("start = %1d;", buttons[JB_START]);
 
