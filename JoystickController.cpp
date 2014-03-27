@@ -19,7 +19,7 @@ JoystickController::JoystickController(int **axes, char **buttons)
     *axes = m_axes = NULL;
     *buttons = m_buttons = NULL;
 
-	if((m_fd = open(JOY_DEV, O_RDONLY | O_NONBLOCK | O_SYNC)) == -1)
+    if((m_fd = open(JOY_DEV, O_RDONLY | O_NONBLOCK | O_SYNC)) == -1)
     {
         printf("Couldn't open joystick\n");
         return;
@@ -34,7 +34,7 @@ JoystickController::JoystickController(int **axes, char **buttons)
     ioctl(m_fd, JSIOCGBUTTONS, &data);
     m_numButtons = data;
 
-	m_axes = (int *) calloc(m_numAxes, sizeof(int));
+    m_axes = (int *) calloc(m_numAxes, sizeof(int));
     *axes = m_axes;
 
     m_buttons = (char *) calloc(m_numButtons, sizeof(char));
